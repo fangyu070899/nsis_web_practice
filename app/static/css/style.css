@@ -1,0 +1,40 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.outline {
+    outline: 1px dashed blue;
+}
+
+.box {
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+}
+
+.smallbox {
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+}
+
+.bgyellow {
+    background-color: rgb(240, 231, 218);
+}
+
+.bgpink {
+    background-color: rgb(247, 229, 229);
+}
+
+.bgred {
+    background-color: #831a18;
+}
+
+@media (min-width: 768px) {
+    .navbar-nav.navbar-center {
+      position: absolute;
+      left: 50%;
+      transform: translatex(-50%);
+    }
+  }

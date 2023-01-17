@@ -1,0 +1,2044 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi2S</title>
+
+  <!-- Bootstrap core CSS cdn 5.1.3 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <!-- local style -->
+  <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+</head>
+
+<body class="bgyellow">
+
+  <div id="app">
+    <!-- content -->
+    <div class="container-xxl bg-white">
+      <nav class="navbar navbar-expand-lg navbar-dark bgred" aria-label="Eighth navbar example">
+        <div class="container">
+          <img src="/static/images/logo_2.png" alt="替代文字">
+          <a class="navbar-brand ms-3" href="#">
+            <template v-if="language==1">學籍系統</template>
+            <template v-else>Student Identification System</template>
+          </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample07"
+            aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarsExample07">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 "></ul>
+            <div class="col-3 text-end">
+              <button v-on:click="changelanguage(0)" type="button" class="btn  me-2"
+                style="background-color:rgb(240, 231, 218)">ENGLISH</button>
+              <button v-on:click="changelanguage(1)" type="button" class="btn  me-2"
+                style="background-color:rgb(240, 231, 218)">中文</button>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <nav class="navbar navbar-expand-sm navbar-dark " aria-label="Tenth navbar example"
+        style="background-color:#c43535;height: 40px">
+        <div class="collapse navbar-collapse justify-content-center" id="navbarsExample08">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">
+                <template v-if="language==1">111學年度第1學期</template>
+                <template v-else>Academic Year:2022 Semester:Fall</template>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <div class="m-2">
+        <div class="d-flex flex-row align-items-center">
+          <template v-if="language==1">
+            <button v-on:click="changepage(0)" type="button" class="btn p-2 m-1"
+              style="background-color:rgb(240, 231, 218)">學籍資訊</button>
+            <button v-on:click="changepage(1)" type="button" class="btn p-2 m-1"
+              style="background-color:rgb(240, 231, 218)">選課資訊</button>
+            <button v-on:click="changepage(2)" type="button" class="btn p-2 m-1"
+              style="background-color:rgb(240, 231, 218)">繳費資訊</button>
+            <button v-on:click="changepage(3)" type="button" class="btn p-2 m-1"
+              style="background-color:rgb(240, 231, 218)">歷年成績</button>
+            <button v-on:click="changepage(4)" type="button" class="btn p-2 m-1"
+              style="background-color:rgb(240, 231, 218)">體育修課狀況</button>
+            <button type="button" class="btn p-2 m-1 ms-auto" style="background-color:rgb(240, 231, 218)">登出-></button>
+          </template>
+          <template v-else>
+            <button v-on:click="changepage(0)" type="button" class="btn p-2 m-1"
+              style="background-color:rgb(240, 231, 218)">Student Record</button>
+            <button v-on:click="changepage(1)" type="button" class="btn p-2 m-1"
+              style="background-color:rgb(240, 231, 218)">Course List</button>
+            <button v-on:click="changepage(2)" type="button" class="btn p-2 m-1"
+              style="background-color:rgb(240, 231, 218)">School Fees</button>
+            <button v-on:click="changepage(3)" type="button" class="btn p-2 m-1"
+              style="background-color:rgb(240, 231, 218)">Academic Records</button>
+            <button v-on:click="changepage(4)" type="button" class="btn p-2 m-1"
+              style="background-color:rgb(240, 231, 218)">Physical Education</button>
+            <button type="button" class="btn p-2 m-1 ms-auto" style="background-color:rgb(240, 231, 218)">Log out
+              -></button>
+          </template>
+
+        </div>
+        <template v-if="language==1">
+          <template v-if="page==0">
+            <!-- 學籍資訊 -->
+            <div class="d-flex flex-row">
+              <div class="container-lg d-none d-md-block pt-3" style="width: 30vw">
+                <table class="table table-striped table-bordered table-hover " style="width: 30vw">
+                  <tbody>
+                    <tr class="text-center">
+                      <td colspan="2">基本資料</td>
+                    </tr>
+                    <tr>
+                      <td scope="row">姓名</td>
+                      <td>范芳瑜</td>
+                    </tr>
+                    <tr>
+                      <td scope="row">英文姓名</td>
+                      <td>FAN, FANG-YU</td>
+                    </tr>
+                    <tr>
+                      <td scope="row">學號</td>
+                      <td>E14096407</td>
+                    </tr>
+                    <tr>
+                      <td scope="row">系所代號</td>
+                      <td>資訊系</td>
+                    </tr>
+                    <tr>
+                      <td scope="row">班別</td>
+                      <td>甲</td>
+                    </tr>
+                    <tr>
+                      <td scope="row">年級</td>
+                      <td>2</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="container-xxl ps-4 pt-3">
+                <div class="d-flex flex-column">
+                  <table class="table table-striped table-bordered table-hover rounded-3 ">
+                    <tbody>
+                      <tr class="text-center">
+                        <td colspan="2">學籍資料</td>
+                      </tr>
+                      <tr>
+                        <td scope="row">學制別</td>
+                        <td>NCK4V</td>
+                      </tr>
+                      <tr>
+                        <td scope="row">入學年月</td>
+                        <td>109/09</td>
+                      </tr>
+                      <tr>
+                        <td scope="row">核准日期</td>
+                        <td>109/11/24</td>
+                      </tr>
+                      <tr>
+                        <td scope="row">入學核准文號</td>
+                        <td>109-063</td>
+                      </tr>
+                      <tr>
+                        <td scope="row">應修年限</td>
+                        <td>4</td>
+                      </tr>
+                      <tr>
+                        <td scope="row">可延修學年</td>
+                        <td>2</td>
+                      </tr>
+                      <tr>
+                        <td scope="row">在校狀況</td>
+                        <td>註冊(在學)</td>
+                      </tr>
+                      <tr>
+                        <td scope="row">在校學期數</td>
+                        <td>4</td>
+                      </tr>
+                      <tr>
+                        <td scope="row">最後註冊</td>
+                        <td>0110/2</td>
+                      </tr>
+                      <tr>
+                        <td scope="row" class="align-middle">全部註冊休學資料</td>
+                        <td>
+                          <select class="form-select" aria-label="Default select example">
+                            <option selected>0109 1 註冊</option>
+                            <option value="1">0109 2 註冊</option>
+                            <option value="2">0110 1 註冊</option>
+                            <option value="3">0110 2 註冊</option>
+                          </select>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td scope="row">畢業</td>
+                        <td>0000/</td>
+                      </tr>
+                      <tr>
+                        <td scope="row">畢業日期</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td scope="row">畢業核准文號</td>
+                        <td>字號</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <table class="table table-striped table-bordered table-hover rounded-3 ">
+                    <tbody>
+                      <tr class="text-center">
+                        <td colspan="2">入學前資料</td>
+                      </tr>
+                      <tr>
+                        <td scope="row">入學前學校</td>
+                        <td>臺中市立臺中女中</td>
+                      </tr>
+                      <td scope="row">資格</td>
+                      <td>高中</td>
+                      </tr>
+                      <tr>
+                        <td scope="row">離校年日</td>
+                        <td>109/06</td>
+                      </tr>
+                      <tr>
+                        <td scope="row">離校狀況</td>
+                        <td>畢</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </template>
+          <template v-else-if="page==1">
+            <!-- 選課資訊 -->
+            <div class="container-xxl p-3">
+              <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link active link-danger" id="list-tab" data-bs-toggle="tab" data-bs-target="#list"
+                    type="button" role="tab" aria-controls="list" aria-selected="true">以列表檢視</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link link-danger" id="table-tab" data-bs-toggle="tab" data-bs-target="#table"
+                    type="button" role="tab" aria-controls="table" aria-selected="false">以課表檢視</button>
+                </li>
+              </ul>
+              <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="list" role="tabpanel" aria-labelledby="list-tab">
+                  <table class="table table-striped table-bordered table-hover mt-3">
+                    <thead>
+                      <tr>
+                        <th scope="col">系號-序號</th>
+                        <th scope="col">課程碼-分班碼</th>
+                        <th scope="col">科目名稱</th>
+                        <th scope="col">選必修</th>
+                        <th scope="col">學分數</th>
+                        <th scope="col">分數</th>
+                        <th scope="col">時間</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td scope="row">A9-105</td>
+                        <td>A9745001</td>
+                        <td>心理學</td>
+                        <td>必修/通識</td>
+                        <td>2</td>
+                        <td>96</td>
+                        <td>星期一7~8</td>
+                      </tr>
+                      <tr>
+                        <td scope="row">A6-6</td>
+                        <td>A621600</td>
+                        <td>服務學習（三）─藝術中心</td>
+                        <td>必修</td>
+                        <td>0</td>
+                        <td>90</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td scope="row">A9-571</td>
+                        <td>A944100</td>
+                        <td>台灣綜合大學通識巡迴講座-公民素養</td>
+                        <td>必修/通識</td>
+                        <td>2</td>
+                        <td>85</td>
+                        <td>星期四7~8</td>
+                      </tr>
+                      <tr>
+                        <td scope="row">A9-105</td>
+                        <td>A9745001</td>
+                        <td>心理學</td>
+                        <td>必修/通識</td>
+                        <td>2</td>
+                        <td>96</td>
+                        <td>星期一7~8</td>
+                      </tr>
+                      <tr>
+                        <td scope="row">A6-6</td>
+                        <td>A621600</td>
+                        <td>服務學習（三）─藝術中心</td>
+                        <td>必修</td>
+                        <td>0</td>
+                        <td>90</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td scope="row">A9-571</td>
+                        <td>A944100</td>
+                        <td>台灣綜合大學通識巡迴講座-公民素養</td>
+                        <td>必修/通識</td>
+                        <td>2</td>
+                        <td>85</td>
+                        <td>星期四7~8</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="tab-pane fade" id="table" role="tabpanel" aria-labelledby="table-tab">
+                  <table class="table table-bordered mt-3">
+                    <thead>
+                      <tr>
+                        <th scope="col">時間區段</th>
+                        <th scope="col">節次</th>
+                        <th scope="col">時間</th>
+                        <th scope="col">一</th>
+                        <th scope="col">二</th>
+                        <th scope="col">三</th>
+                        <th scope="col">四</th>
+                        <th scope="col">五</th>
+                        <th scope="col">六</th>
+                        <th scope="col">日</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td rowspan="5" class="align-middle bg-light">上午</td>
+                        <td class="align-middle bg-light">0</td>
+                        <td>07:10~08:00</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td class="align-middle bg-light">1</td>
+                        <td>08:10~09:00</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td class="align-middle bg-light">2</td>
+                        <td>09:10~10:00</td>
+                        <td></td>
+                        <td></td>
+                        <td class="bg-light">【F7-102】微算機原理與應用(含實驗)<br>
+                          （地點：資訊新館-65304</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td class="align-middle bg-light">3</td>
+                        <td>10:10~11:00</td>
+                        <td></td>
+                        <td></td>
+                        <td class="bg-light">【F7-102】微算機原理與應用(含實驗)<br>
+                          （地點：資訊新館-65304</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td class="align-middle bg-light">4</td>
+                        <td>11:10~12:00</td>
+                        <td></td>
+                        <td></td>
+                        <td class="bg-light">【F7-102】微算機原理與應用(含實驗)<br>
+                          （地點：資訊新館-65304</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td class="align-middle bg-light">中午</td>
+                        <td class="align-middle bg-light">N</td>
+                        <td>12:10~13:00</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td rowspan="5" class="align-middle bg-light">下午</td>
+                        <td class="align-middle bg-light">5</td>
+                        <td>13:10~14:00</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td class="align-middle bg-light">6</td>
+                        <td>14:10~15:00</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="bg-light">【F7-119】作業系統<br>
+                          （地點：資訊新館-65405)</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td class="align-middle bg-light">7</td>
+                        <td>15:10~16:00</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="bg-light">【F7-102】微算機原理與應用(含實驗)<br>
+                          （地點：資訊新館-65304</td>
+                        <td class="bg-light">【F7-119】作業系統<br>
+                          （地點：資訊新館-65405)</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td class="align-middle bg-light">8</td>
+                        <td>16:10~17:00</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="bg-light">【F7-102】微算機原理與應用(含實驗)<br>
+                          （地點：資訊新館-65304</td>
+                        <td class="bg-light">【F7-119】作業系統<br>
+                          （地點：資訊新館-65405)</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td class="align-middle bg-light">9</td>
+                        <td>18:10~19:00</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="bg-light">【F7-102】微算機原理與應用(含實驗)<br>
+                          （地點：資訊新館-65304</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td class="align-middle bg-light" rowspan="5">夜間</td>
+                        <td class="align-middle bg-light">A</td>
+                        <td>19:10~20:00</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td class="align-middle bg-light">B</td>
+                        <td>20:10~21:00</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td class="align-middle bg-light">C</td>
+                        <td>20:10~21:00</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td class="align-middle bg-light">D</td>
+                        <td>21:10~22:00</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td class="align-middle bg-light">E</td>
+                        <td>22:10~23:00</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td class="align-middle bg-light" colspan="3">時間未定或彈性時間<br>(含彈性密集課程)</td>
+                        <td colspan="7">【F7-107】資訊專題(一)</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+
+            </div>
+          </template>
+          <template v-else-if="page==2">
+            <div class="container-xxl p-3">
+              <table class="table table-bordered table-hover">
+                <tbody>
+                  <tr class="text-center">
+                    <td colspan="2" class="table-secondary">當學期應繳費用明細(至2022/8/10 07:55 止)
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>學號</td>
+                    <td>E14096407</td>
+                  </tr>
+                  <tr>
+                    <td scope="row">應繳金額</td>
+                    <td class="text-danger">29700</td>
+                  </tr>
+                  <tr>
+                    <td scope="row">網路費</td>
+                    <td>0</td>
+                  </tr>
+                  <tr>
+                    <td scope="row">宿網費</td>
+                    <td>0</td>
+                  </tr>
+                  <tr>
+                    <td scope="row">研究所基本費</td>
+                    <td>0</td>
+                  </tr>
+                  <tr>
+                    <td scope="row">學費</td>
+                    <td>17990</td>
+                  </tr>
+                  <tr>
+                    <td scope="row">學分費</td>
+                    <td>0</td>
+                  </tr>
+                  <tr>
+                    <td scope="row">教育費</td>
+                    <td>0</td>
+                  </tr>
+                  <tr>
+                    <td scope="row">語言費</td>
+                    <td>0</td>
+                  </tr>
+                  <tr>
+                    <td scope="row">雜費</td>
+                    <td>11500</td>
+                  </tr>
+                  <tr>
+                    <td scope="row">積欠</td>
+                    <td>0</td>
+                  </tr>
+                  <tr>
+                    <td scope="row">保險費A</td>
+                    <td>210</td>
+                  </tr>
+                  <tr>
+                    <td scope="row">保險費B</td>
+                    <td>0</td>
+                  </tr>
+                  <tr>
+                    <td scope="row">備註</td>
+                    <td></td>
+                  </tr>
+                  <tr class="text-center table-secondary">
+                    <td colspan="2">0111 1 已繳金額
+                    </td>
+                  </tr>
+                  <tr>
+                    <td scope="row">收據號碼</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td scope="row">金額</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+
+            </div>
+          </template>
+          <template v-else-if="page==3">
+            <div>
+              <div class="container-xxl p-3">
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                  <li class="nav-item" role="presentation">
+                    <button class="nav-link active link-danger" id="all-tab" data-bs-toggle="tab" data-bs-target="#all"
+                      type="button" role="tab" aria-controls="all" aria-selected="true">總覽</button>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                    <button class="nav-link link-danger" id="score1-tab" data-bs-toggle="tab" data-bs-target="#score1"
+                      type="button" role="tab" aria-controls="score1" aria-selected="false">111學年上學期</button>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                    <button class="nav-link link-danger" id="score2-tab" data-bs-toggle="tab" data-bs-target="#score2"
+                      type="button" role="tab" aria-controls="score2" aria-selected="false">110學年下學期</button>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                    <button class="nav-link link-danger" id="score3-tab" data-bs-toggle="tab" data-bs-target="#score3"
+                      type="button" role="tab" aria-controls="score3" aria-selected="false">110學年上學期</button>
+                  </li>
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                  <div class="tab-pane fade show active" id="all" role="tabpanel" aria-labelledby="all-tab">
+                    <table class="table table-striped table-bordered table-hover mt-3">
+                      <thead>
+                        <tr>
+                          <th scope="col">修業學期數</th>
+                          <th scope="col">學年期</th>
+                          <th scope="col">必承</th>
+                          <th scope="col">選承</th>
+                          <th scope="col">暑承</th>
+                          <th scope="col">輔/雙</th>
+                          <th scope="col">抵承</th>
+                          <th scope="col">實得</th>
+                          <th scope="col">總修學分</th>
+                          <th scope="col">加權總分</th>
+                          <th scope="col">平均</th>
+                          <th scope="col">班排</th>
+                          <th scope="col">系排</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td scope="row">3</td>
+                          <td>0111上</td>
+                          <td>12</td>
+                          <td>9</td>
+                          <td>0</td>
+                          <td>0</td>
+                          <td>21</td>
+                          <td>21</td>
+                          <td>21</td>
+                          <td>1875</td>
+                          <td>89.29</td>
+                          <td class="text-danger">4/46</td>
+                          <td class="text-danger">11/162</td>
+                        </tr>
+                        <tr>
+                          <td scope="row">2</td>
+                          <td>0110下</td>
+                          <td>12</td>
+                          <td>9</td>
+                          <td>0</td>
+                          <td>0</td>
+                          <td>21</td>
+                          <td>21</td>
+                          <td>21</td>
+                          <td>1875</td>
+                          <td>89.29</td>
+                          <td class="text-danger">4/46</td>
+                          <td class="text-danger">11/162</td>
+                        </tr>
+                        <tr>
+                          <td scope="row">1</td>
+                          <td>0110上</td>
+                          <td>12</td>
+                          <td>9</td>
+                          <td>0</td>
+                          <td>0</td>
+                          <td>21</td>
+                          <td>21</td>
+                          <td>21</td>
+                          <td>1875</td>
+                          <td>89.29</td>
+                          <td class="text-danger">4/46</td>
+                          <td class="text-danger">11/162</td>
+                        </tr>
+                        <tr>
+                          <td scope="row"></td>
+                          <td>加總</td>
+                          <td>36</td>
+                          <td>27</td>
+                          <td>0</td>
+                          <td>0</td>
+                          <td>63</td>
+                          <td>63</td>
+                          <td>63</td>
+                          <td></td>
+                          <td></td>
+                          <td class="text-danger"></td>
+                          <td class="text-danger"></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="tab-pane fade" id="score1" role="tabpanel" aria-labelledby="score1-tab">
+                    <table class="table table-striped table-bordered table-hover mt-3">
+                      <thead>
+                        <tr>
+                          <th scope="col">系號-序號</th>
+                          <th scope="col">課程碼-分班碼</th>
+                          <th scope="col">科目名稱</th>
+                          <th scope="col">選必修</th>
+                          <th scope="col">學分數</th>
+                          <th scope="col">分數</th>
+                          <th scope="col">等第製成績</th>
+                          <th scope="col"></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td scope="row">A9-105</td>
+                          <td>A9745001</td>
+                          <td>心理學</td>
+                          <td>必修/通識</td>
+                          <td>2</td>
+                          <td>96</td>
+                          <td>A+</td>
+                          <td></td>
+                        </tr>
+                        <tr>
+                          <td scope="row">A6-6</td>
+                          <td>A621600</td>
+                          <td>服務學習（三）─藝術中心</td>
+                          <td>必修</td>
+                          <td>0</td>
+                          <td>90</td>
+                          <td>A+</td>
+                          <td></td>
+                        </tr>
+                        <tr>
+                          <td scope="row">A9-571</td>
+                          <td>A944100</td>
+                          <td>台灣綜合大學通識巡迴講座-公民素養</td>
+                          <td>必修/通識</td>
+                          <td>2</td>
+                          <td>85</td>
+                          <td>A+</td>
+                          <td></td>
+                        </tr>
+                        <tr>
+                          <td scope="row">A9-105</td>
+                          <td>A9745001</td>
+                          <td>心理學</td>
+                          <td>必修/通識</td>
+                          <td>2</td>
+                          <td>96</td>
+                          <td>A+</td>
+                          <td class="text-danger">社會科學</td>
+                        </tr>
+                        <tr>
+                          <td scope="row">A6-6</td>
+                          <td>A621600</td>
+                          <td>服務學習（三）─藝術中心</td>
+                          <td>必修</td>
+                          <td>0</td>
+                          <td>90</td>
+                          <td>A+</td>
+                          <td></td>
+                        </tr>
+                        <tr>
+                          <td scope="row">A9-571</td>
+                          <td>A944100</td>
+                          <td>台灣綜合大學通識巡迴講座-公民素養</td>
+                          <td>必修/通識</td>
+                          <td>2</td>
+                          <td>85</td>
+                          <td>A+</td>
+                          <td class="text-danger">融合通識</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <div class=" bgpink text-danger p-3 mb-3 mt-3 text-center">
+                      牛津英語線上測驗90分以上 -> 抵免英文2學分
+                    </div>
+                  </div>
+                  <div class="tab-pane fade" id="score2" role="tabpanel" aria-labelledby="score2-tab">
+                    <table class="table table-striped table-bordered table-hover mt-3">
+                      <thead>
+                        <tr>
+                          <th scope="col">系號-序號</th>
+                          <th scope="col">課程碼-分班碼</th>
+                          <th scope="col">科目名稱</th>
+                          <th scope="col">選必修</th>
+                          <th scope="col">學分數</th>
+                          <th scope="col">分數</th>
+                          <th scope="col">等第製成績</th>
+                          <th scope="col"></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td scope="row">A9-105</td>
+                          <td>A9745001</td>
+                          <td>心理學</td>
+                          <td>必修/通識</td>
+                          <td>2</td>
+                          <td>96</td>
+                          <td>A+</td>
+                          <td></td>
+                        </tr>
+                        <tr>
+                          <td scope="row">A6-6</td>
+                          <td>A621600</td>
+                          <td>服務學習（三）─藝術中心</td>
+                          <td>必修</td>
+                          <td>0</td>
+                          <td>90</td>
+                          <td>A+</td>
+                          <td></td>
+                        </tr>
+                        <tr>
+                          <td scope="row">A9-571</td>
+                          <td>A944100</td>
+                          <td>台灣綜合大學通識巡迴講座-公民素養</td>
+                          <td>必修/通識</td>
+                          <td>2</td>
+                          <td>85</td>
+                          <td>A+</td>
+                          <td></td>
+                        </tr>
+                        <tr>
+                          <td scope="row">A9-105</td>
+                          <td>A9745001</td>
+                          <td>心理學</td>
+                          <td>必修/通識</td>
+                          <td>2</td>
+                          <td>96</td>
+                          <td>A+</td>
+                          <td class="text-danger">社會科學</td>
+                        </tr>
+                        <tr>
+                          <td scope="row">A6-6</td>
+                          <td>A621600</td>
+                          <td>服務學習（三）─藝術中心</td>
+                          <td>必修</td>
+                          <td>0</td>
+                          <td>90</td>
+                          <td>A+</td>
+                          <td></td>
+                        </tr>
+                        <tr>
+                          <td scope="row">A9-571</td>
+                          <td>A944100</td>
+                          <td>台灣綜合大學通識巡迴講座-公民素養</td>
+                          <td>必修/通識</td>
+                          <td>2</td>
+                          <td>85</td>
+                          <td>A+</td>
+                          <td class="text-danger">融合通識</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <div class=" bgpink text-danger p-3 mb-3 mt-3 text-center">
+                      其他同等級之英語能力檢定證明 -> 通過英文能力指標
+                    </div>
+                  </div>
+                  <div class="tab-pane fade" id="score3" role="tabpanel" aria-labelledby="score3-tab">
+                    <table class="table table-striped table-bordered table-hover mt-3">
+                      <thead>
+                        <tr>
+                          <th scope="col">系號-序號</th>
+                          <th scope="col">課程碼-分班碼</th>
+                          <th scope="col">科目名稱</th>
+                          <th scope="col">選必修</th>
+                          <th scope="col">學分數</th>
+                          <th scope="col">分數</th>
+                          <th scope="col">等第製成績</th>
+                          <th scope="col"></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td scope="row">A9-105</td>
+                          <td>A9745001</td>
+                          <td>心理學</td>
+                          <td>必修/通識</td>
+                          <td>2</td>
+                          <td>96</td>
+                          <td>A+</td>
+                          <td></td>
+                        </tr>
+                        <tr>
+                          <td scope="row">A6-6</td>
+                          <td>A621600</td>
+                          <td>服務學習（三）─藝術中心</td>
+                          <td>必修</td>
+                          <td>0</td>
+                          <td>90</td>
+                          <td>A+</td>
+                          <td></td>
+                        </tr>
+                        <tr>
+                          <td scope="row">A9-571</td>
+                          <td>A944100</td>
+                          <td>台灣綜合大學通識巡迴講座-公民素養</td>
+                          <td>必修/通識</td>
+                          <td>2</td>
+                          <td>85</td>
+                          <td>A+</td>
+                          <td></td>
+                        </tr>
+                        <tr>
+                          <td scope="row">A9-105</td>
+                          <td>A9745001</td>
+                          <td>心理學</td>
+                          <td>必修/通識</td>
+                          <td>2</td>
+                          <td>96</td>
+                          <td>A+</td>
+                          <td class="text-danger">社會科學</td>
+                        </tr>
+                        <tr>
+                          <td scope="row">A6-6</td>
+                          <td>A621600</td>
+                          <td>服務學習（三）─藝術中心</td>
+                          <td>必修</td>
+                          <td>0</td>
+                          <td>90</td>
+                          <td>A+</td>
+                          <td></td>
+                        </tr>
+                        <tr>
+                          <td scope="row">A9-571</td>
+                          <td>A944100</td>
+                          <td>台灣綜合大學通識巡迴講座-公民素養</td>
+                          <td>必修/通識</td>
+                          <td>2</td>
+                          <td>85</td>
+                          <td>A+</td>
+                          <td class="text-danger">融合通識</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+          </template>
+          <template v-else-if="page==4">
+            <div class="container-xxl p-3">
+              <div class="text-danger bgpink p-3 mb-3 text-center">
+                缺二年級體育 1 門
+              </div>
+              <table class="table table-striped table-bordered table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">學年</th>
+                    <th scope="col">學期</th>
+                    <th scope="col">科目名稱</th>
+                    <th scope="col">選必修</th>
+                    <th scope="col">學分數</th>
+                    <th scope="col">分數</th>
+                    <th scope="col">科目所屬年級</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>0109</td>
+                    <td>1</td>
+                    <td>體育（一）</td>
+                    <td>必修</td>
+                    <td>0</td>
+                    <td>82</td>
+                    <td>一上</td>
+                  </tr>
+                  <tr>
+                    <td>0109</td>
+                    <td>1</td>
+                    <td>體育（一）</td>
+                    <td>必修</td>
+                    <td>0</td>
+                    <td>82</td>
+                    <td>一上</td>
+                  </tr>
+                  <tr>
+                    <td>0109</td>
+                    <td>1</td>
+                    <td>體育（一）</td>
+                    <td>必修</td>
+                    <td>0</td>
+                    <td>82</td>
+                    <td>一上</td>
+                  </tr>
+                </tbody>
+              </table>
+              <img src="/static/images/a2.jpg" alt="替代文字">
+            </div>
+          </template>
+          <template v-else>
+            <div>page not found</div>
+          </template>
+
+      </div>
+      </template>
+      <template v-else>
+        <!-- english -->
+        <template v-if="page==0">
+          <!-- 學籍資訊 -->
+          <div class="d-flex flex-row">
+            <div class="container-lg d-none d-md-block pt-3" style="width: 30vw">
+              <table class="table table-striped table-bordered table-hover " style="width: 30vw">
+                <tbody>
+                  <tr class="text-center">
+                    <td colspan="2">Personal Information</td>
+                  </tr>
+                  <tr>
+                    <td scope="row">Name</td>
+                    <td>范芳瑜</td>
+                  </tr>
+                  <tr>
+                    <td scope="row">English Name</td>
+                    <td>FAN, FANG-YU</td>
+                  </tr>
+                  <tr>
+                    <td scope="row">Student ID </td>
+                    <td>E14096407</td>
+                  </tr>
+                  <tr>
+                    <td scope="row">Department</td>
+                    <td>Computer Science and Information Engineering</td>
+                  </tr>
+                  <tr>
+                    <td scope="row">Class</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td scope="row">Year</td>
+                    <td>2</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="container-xxl ps-4 pt-3">
+              <div class="d-flex flex-column">
+                <table class="table table-striped table-bordered table-hover rounded-3 ">
+                  <tbody>
+                    <tr class="text-center">
+                      <td colspan="2">Student Record</td>
+                    </tr>
+                    <tr>
+                      <td scope="row">Date of Enrollment</td>
+                      <td>109/09</td>
+                    </tr>
+                    <td scope="row">Enrollment No.</td>
+                    <td>109-063</td>
+                    </tr>
+                    <tr>
+                      <td scope="row">Duration of Program</td>
+                      <td>4</td>
+                    </tr>
+                    <tr>
+                      <td scope="row">Extensible year</td>
+                      <td>2</td>
+                    </tr>
+                    <tr>
+                      <td scope="row">Student Status</td>
+                      <td>Fail to Register</td>
+                    </tr>
+                    <tr>
+                      <td scope="row">Final Resister Semester</td>
+                      <td>0110/2</td>
+                    </tr>
+                    <tr>
+                      <td scope="row" class="align-middle">Registration/Suspension</td>
+                      <td>
+                        <select class="form-select" aria-label="Default select example">
+                          <option selected>0109 1 Registration</option>
+                          <option value="1">0109 2 Registration</option>
+                          <option value="2">0110 1 Registration</option>
+                          <option value="3">0110 2 Registration</option>
+                        </select>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td scope="row">Date of Graduation</td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td scope="row">Graduation No.</td>
+                      <td></td>
+                    </tr>
+                  </tbody>
+                </table>
+                <table class="table table-striped table-bordered table-hover rounded-3 ">
+                  <tbody>
+                    <tr class="text-center">
+                      <td colspan="2">Previous Record</td>
+                    </tr>
+                    <tr>
+                      <td scope="row">Previous School</td>
+                      <td>臺中市立臺中女中</td>
+                    </tr>
+                    <td scope="row">Qualification</td>
+                    <td>高中</td>
+                    </tr>
+                    <tr>
+                      <td scope="row">Date of Graduation</td>
+                      <td>109/06</td>
+                    </tr>
+                    <tr>
+                      <td scope="row">Graduated/Not Graduated</td>
+                      <td>Graduated</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+            </div>
+          </div>
+        </template>
+        <template v-else-if="page==1">
+          <!-- 選課資訊 -->
+          <div class="container-xxl p-3">
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+              <li class="nav-item" role="presentation">
+                <button class="nav-link active link-danger" id="list-tab" data-bs-toggle="tab" data-bs-target="#list"
+                  type="button" role="tab" aria-controls="list" aria-selected="true">By course code</button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link link-danger" id="table-tab" data-bs-toggle="tab" data-bs-target="#table"
+                  type="button" role="tab" aria-controls="table" aria-selected="false">By course schedule</button>
+              </li>
+            </ul>
+            <div class="tab-content" id="myTabContent">
+              <div class="tab-pane fade show active" id="list" role="tabpanel" aria-labelledby="list-tab">
+                <table class="table table-striped table-bordered table-hover mt-3">
+                  <thead>
+                    <tr>
+                      <th scope="col">Code-Serial Number</th>
+                      <th scope="col">Course System Number-Class Code</th>
+                      <th scope="col">Course Name</th>
+                      <th scope="col">Elective/Required</th>
+                      <th scope="col">Credits Elective</th>
+                      <th scope="col">Grades</th>
+                      <th scope="col">Schedule</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td scope="row">A9-105</td>
+                      <td>A9745001</td>
+                      <td>MEDIA AND SOCIETY</td>
+                      <td>Required/General Education</td>
+                      <td>2</td>
+                      <td>96</td>
+                      <td>Tuesday 5~6</td>
+                    </tr>
+                    <tr>
+                      <td scope="row">A6-6</td>
+                      <td>A621600</td>
+                      <td>THEORY OF COMPUTATION</td>
+                      <td>Elective</td>
+                      <td>0</td>
+                      <td>90</td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td scope="row">A9-571</td>
+                      <td>A944100</td>
+                      <td>OPERATING SYSTEMS</td>
+                      <td>REQUIRED</td>
+                      <td>3</td>
+                      <td>85</td>
+                      <td>Friday 6~8</td>
+                    </tr>
+                    <tr>
+                      <td scope="row">A9-105</td>
+                      <td>A9745001</td>
+                      <td>MEDIA AND SOCIETY</td>
+                      <td>Required/General Education</td>
+                      <td>2</td>
+                      <td>96</td>
+                      <td>Tuesday 5~6</td>
+                    </tr>
+                    <tr>
+                      <td scope="row">A6-6</td>
+                      <td>A621600</td>
+                      <td>THEORY OF COMPUTATION</td>
+                      <td>Elective</td>
+                      <td>0</td>
+                      <td>90</td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td scope="row">A9-571</td>
+                      <td>A944100</td>
+                      <td>OPERATING SYSTEMS</td>
+                      <td>REQUIRED</td>
+                      <td>3</td>
+                      <td>85</td>
+                      <td>Friday 6~8</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="tab-pane fade" id="table" role="tabpanel" aria-labelledby="table-tab">
+                <table class="table table-bordered mt-3">
+                  <thead>
+                    <tr>
+                      <th scope="col">Time Interval</th>
+                      <th scope="col">Section</th>
+                      <th scope="col">Time</th>
+                      <th scope="col">Monday</th>
+                      <th scope="col">Tuesday</th>
+                      <th scope="col">Wednesday</th>
+                      <th scope="col">Thursday</th>
+                      <th scope="col">Friday</th>
+                      <th scope="col">Saturday</th>
+                      <th scope="col">Sunday</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td rowspan="5" class="align-middle bg-light">Morning</td>
+                      <td class="align-middle bg-light">0</td>
+                      <td>07:10~08:00</td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td class="align-middle bg-light">1</td>
+                      <td>08:10~09:00</td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td class="align-middle bg-light">2</td>
+                      <td>09:10~10:00</td>
+                      <td></td>
+                      <td></td>
+                      <td class="bg-light">【F7-102】MICROPROCESSOR PRINCIPLES AND APPLICATIONS<br>
+                        (Location:New Building of Information Technology--65304)</td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td class="align-middle bg-light">3</td>
+                      <td>10:10~11:00</td>
+                      <td></td>
+                      <td></td>
+                      <td class="bg-light">【F7-102】MICROPROCESSOR PRINCIPLES AND APPLICATIONS<br>
+                        (Location:New Building of Information Technology--65304)</td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td class="align-middle bg-light">4</td>
+                      <td>11:10~12:00</td>
+                      <td></td>
+                      <td></td>
+                      <td class="bg-light">【F7-102】MICROPROCESSOR PRINCIPLES AND APPLICATIONS<br>
+                        (Location:New Building of Information Technology--65304)</td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td class="align-middle bg-light">Noon</td>
+                      <td class="align-middle bg-light">N</td>
+                      <td>12:10~13:00</td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td rowspan="5" class="align-middle bg-light">Afternoon</td>
+                      <td class="align-middle bg-light">5</td>
+                      <td>13:10~14:00</td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td class="align-middle bg-light">6</td>
+                      <td>14:10~15:00</td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td class="bg-light">【F7-119】OPERATING SYSTEMS<br>
+                        (Location:New Building of Information Technology-65405)</td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td class="align-middle bg-light">7</td>
+                      <td>15:10~16:00</td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td class="bg-light">【F7-102】MICROPROCESSOR PRINCIPLES AND APPLICATIONS<br>
+                        (Location:New Building of Information Technology-65304)</td>
+                      <td class="bg-light">【F7-119】OPERATING SYSTEMS<br>
+                        (Location:New Building of Information Technology-65405)</td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td class="align-middle bg-light">8</td>
+                      <td>16:10~17:00</td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td class="bg-light">【F7-102】MICROPROCESSOR PRINCIPLES AND APPLICATIONS<br>
+                        (Location:New Building of Information Technology-65304)</td>
+                      <td class="bg-light">【F7-119】OPERATING SYSTEMS<br>
+                        (Location:New Building of Information Technology-65405)</td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td class="align-middle bg-light">9</td>
+                      <td>18:10~19:00</td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td class="bg-light">【F7-102】MICROPROCESSOR PRINCIPLES AND APPLICATIONS<br>
+                        (Location:New Building of Information Technology-65304)</td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td class="align-middle bg-light" rowspan="5">Evening</td>
+                      <td class="align-middle bg-light">A</td>
+                      <td>19:10~20:00</td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td class="align-middle bg-light">B</td>
+                      <td>20:10~21:00</td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td class="align-middle bg-light">C</td>
+                      <td>20:10~21:00</td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td class="align-middle bg-light">D</td>
+                      <td>21:10~22:00</td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td class="align-middle bg-light">E</td>
+                      <td>22:10~23:00</td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td class="align-middle bg-light" colspan="3">Undecided OR Flexible time<br>(Include the flexible
+                        intensive courses)</td>
+                      <td colspan="7">【F7-107】COMPUTER PROJECT DESIGN(1)</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+
+          </div>
+        </template>
+        <template v-else-if="page==2">
+          <div class="container-xxl p-3">
+            <table class="table table-bordered table-hover">
+              <tbody>
+                <tr class="text-center">
+                  <td colspan="2" class="table-secondary">Details for School Fees </td>
+                </tr>
+                <tr>
+                  <td>Student ID No.</td>
+                  <td>E14096407</td>
+                </tr>
+                <tr>
+                  <td scope="row">Total Fees</td>
+                  <td class="text-danger">29700</td>
+                </tr>
+                <tr>
+                  <td scope="row">Internet Service</td>
+                  <td>0</td>
+                </tr>
+                <tr>
+                  <td scope="row">Dormitory Internet Service</td>
+                  <td>0</td>
+                </tr>
+                <tr>
+                  <td scope="row">Tuition Fees</td>
+                  <td>0</td>
+                </tr>
+                <tr>
+                  <td scope="row">Tuition Fees</td>
+                  <td>17990</td>
+                </tr>
+                <tr>
+                  <td scope="row">Credit Fees</td>
+                  <td>0</td>
+                </tr>
+                <tr>
+                  <td scope="row">Educational Program Fees</td>
+                  <td>0</td>
+                </tr>
+                <tr>
+                  <td scope="row">English Course Fees</td>
+                  <td>0</td>
+                </tr>
+                <tr>
+                  <td scope="row">Miscellaneous Fees</td>
+                  <td>11500</td>
+                </tr>
+                <tr>
+                  <td scope="row">Due Fees</td>
+                  <td>0</td>
+                </tr>
+                <tr>
+                  <td scope="row">Insurancea A</td>
+                  <td>210</td>
+                </tr>
+                <tr>
+                  <td scope="row">Insurancea B</td>
+                  <td>0</td>
+                </tr>
+                <tr>
+                  <td scope="row">Remarks</td>
+                  <td></td>
+                </tr>
+                <tr class="text-center table-secondary">
+                  <td colspan="2">Payment
+                  </td>
+                </tr>
+                <tr>
+                  <td scope="row">Receipt No.</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td scope="row">Amount</td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+
+          </div>
+        </template>
+        <template v-else-if="page==3">
+          <div>
+            <div class="container-xxl p-3">
+              <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link active link-danger" id="all-tab" data-bs-toggle="tab" data-bs-target="#all"
+                    type="button" role="tab" aria-controls="all" aria-selected="true">OVERVIEW</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link link-danger" id="score1-tab" data-bs-toggle="tab" data-bs-target="#score1"
+                    type="button" role="tab" aria-controls="score1" aria-selected="false">2022 FALL</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link link-danger" id="score2-tab" data-bs-toggle="tab" data-bs-target="#score2"
+                    type="button" role="tab" aria-controls="score2" aria-selected="false">2021 SPRING</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link link-danger" id="score3-tab" data-bs-toggle="tab" data-bs-target="#score3"
+                    type="button" role="tab" aria-controls="score3" aria-selected="false">2021 FALL</button>
+                </li>
+              </ul>
+              <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="all" role="tabpanel" aria-labelledby="all-tab">
+                  <table class="table table-striped table-bordered table-hover mt-3">
+                    <thead>
+                      <tr>
+                        <th scope="col">Year Semester</th>
+                        <th scope="col">Required</th>
+                        <th scope="col">Elective</th>
+                        <th scope="col">Summer Courses</th>
+                        <th scope="col">Minor/Second Major</th>
+                        <th scope="col">Credit Equivalent</th>
+                        <th scope="col">Earned Credits</th>
+                        <th scope="col">Total Credits</th>
+                        <th scope="col">Weighted Grades</th>
+                        <th scope="col">Average</th>
+                        <th scope="col">Class Ranking</th>
+                        <th scope="col">Dept. Ranking</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>2022 FALL</td>
+                        <td>12</td>
+                        <td>9</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>21</td>
+                        <td>21</td>
+                        <td>21</td>
+                        <td>1875</td>
+                        <td>89.29</td>
+                        <td class="text-danger">4/46</td>
+                        <td class="text-danger">11/162</td>
+                      </tr>
+                      <tr>
+                        <td>2021 SPRING</td>
+                        <td>12</td>
+                        <td>9</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>21</td>
+                        <td>21</td>
+                        <td>21</td>
+                        <td>1875</td>
+                        <td>89.29</td>
+                        <td class="text-danger">4/46</td>
+                        <td class="text-danger">11/162</td>
+                      </tr>
+                      <tr>
+                        <td>2021 FALL</td>
+                        <td>12</td>
+                        <td>9</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>21</td>
+                        <td>21</td>
+                        <td>21</td>
+                        <td>1875</td>
+                        <td>89.29</td>
+                        <td class="text-danger">4/46</td>
+                        <td class="text-danger">11/162</td>
+                      </tr>
+                      <tr>
+                        <td></td>
+                        <td>36</td>
+                        <td>27</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>63</td>
+                        <td>63</td>
+                        <td>63</td>
+                        <td></td>
+                        <td></td>
+                        <td class="text-danger"></td>
+                        <td class="text-danger"></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="tab-pane fade" id="score1" role="tabpanel" aria-labelledby="score1-tab">
+                  <table class="table table-striped table-bordered table-hover mt-3">
+                    <thead>
+                      <tr>
+                        <th scope="col">Code-Serial Number</th>
+                        <th scope="col">Course System Number-Class Code</th>
+                        <th scope="col">Course Name</th>
+                        <th scope="col">Elective/Required</th>
+                        <th scope="col">Credits Elective</th>
+                        <th scope="col">Grades</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td scope="row">A6-6</td>
+                        <td>A621600</td>
+                        <td>THEORY OF COMPUTATION</td>
+                        <td>Elective</td>
+                        <td>0</td>
+                        <td>90</td>
+                      </tr>
+                      <tr>
+                        <td scope="row">A9-571</td>
+                        <td>A944100</td>
+                        <td>OPERATING SYSTEMS</td>
+                        <td>REQUIRED</td>
+                        <td>3</td>
+                        <td>85</td>
+                      </tr>
+                      <tr>
+                        <td scope="row">A9-105</td>
+                        <td>A9745001</td>
+                        <td>MEDIA AND SOCIETY</td>
+                        <td>Required/General Education</td>
+                        <td>2</td>
+                        <td>96</td>
+                      </tr>
+                      <tr>
+                        <td scope="row">A6-6</td>
+                        <td>A621600</td>
+                        <td>THEORY OF COMPUTATION</td>
+                        <td>Elective</td>
+                        <td>0</td>
+                        <td>90</td>
+                      </tr>
+                      <tr>
+                        <td scope="row">A9-571</td>
+                        <td>A944100</td>
+                        <td>OPERATING SYSTEMS</td>
+                        <td>REQUIRED</td>
+                        <td>3</td>
+                        <td>85</td>
+                      </tr>
+                      <tr>
+                        <td scope="row">A9-105</td>
+                        <td>A9745001</td>
+                        <td>MEDIA AND SOCIETY</td>
+                        <td>Required/General Education</td>
+                        <td>2</td>
+                        <td>96</td>
+                      </tr>
+                      <tr>
+                        <td scope="row">A6-6</td>
+                        <td>A621600</td>
+                        <td>THEORY OF COMPUTATION</td>
+                        <td>Elective</td>
+                        <td>0</td>
+                        <td>90</td>
+                      </tr>
+                      <tr>
+                        <td scope="row">A9-571</td>
+                        <td>A944100</td>
+                        <td>OPERATING SYSTEMS</td>
+                        <td>REQUIRED</td>
+                        <td>3</td>
+                        <td>85</td>
+                      </tr>
+                      <tr>
+                        <td scope="row">A9-105</td>
+                        <td>A9745001</td>
+                        <td>MEDIA AND SOCIETY</td>
+                        <td>Required/General Education</td>
+                        <td>2</td>
+                        <td>96</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <div class=" bgpink text-danger p-3 mb-3 mt-3 text-center">
+                    Score of more than 90 on the Oxford Online Placement Test -> Two credits required of English Courses are exempted.
+                  </div>
+                </div>
+                <div class="tab-pane fade" id="score2" role="tabpanel" aria-labelledby="score2-tab">
+                  <table class="table table-striped table-bordered table-hover mt-3">
+                    <thead>
+                      <tr>
+                        <th scope="col">Code-Serial Number</th>
+                        <th scope="col">Course System Number-Class Code</th>
+                        <th scope="col">Course Name</th>
+                        <th scope="col">Elective/Required</th>
+                        <th scope="col">Credits Elective</th>
+                        <th scope="col">Grades</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td scope="row">A6-6</td>
+                        <td>A621600</td>
+                        <td>THEORY OF COMPUTATION</td>
+                        <td>Elective</td>
+                        <td>0</td>
+                        <td>90</td>
+                      </tr>
+                      <tr>
+                        <td scope="row">A9-571</td>
+                        <td>A944100</td>
+                        <td>OPERATING SYSTEMS</td>
+                        <td>REQUIRED</td>
+                        <td>3</td>
+                        <td>85</td>
+                      </tr>
+                      <tr>
+                        <td scope="row">A9-105</td>
+                        <td>A9745001</td>
+                        <td>MEDIA AND SOCIETY</td>
+                        <td>Required/General Education</td>
+                        <td>2</td>
+                        <td>96</td>
+                      </tr>
+                      <tr>
+                        <td scope="row">A6-6</td>
+                        <td>A621600</td>
+                        <td>THEORY OF COMPUTATION</td>
+                        <td>Elective</td>
+                        <td>0</td>
+                        <td>90</td>
+                      </tr>
+                      <tr>
+                        <td scope="row">A9-571</td>
+                        <td>A944100</td>
+                        <td>OPERATING SYSTEMS</td>
+                        <td>REQUIRED</td>
+                        <td>3</td>
+                        <td>85</td>
+                      </tr>
+                      <tr>
+                        <td scope="row">A9-105</td>
+                        <td>A9745001</td>
+                        <td>MEDIA AND SOCIETY</td>
+                        <td>Required/General Education</td>
+                        <td>2</td>
+                        <td>96</td>
+                      </tr>
+                      <tr>
+                        <td scope="row">A6-6</td>
+                        <td>A621600</td>
+                        <td>THEORY OF COMPUTATION</td>
+                        <td>Elective</td>
+                        <td>0</td>
+                        <td>90</td>
+                      </tr>
+                      <tr>
+                        <td scope="row">A9-571</td>
+                        <td>A944100</td>
+                        <td>OPERATING SYSTEMS</td>
+                        <td>REQUIRED</td>
+                        <td>3</td>
+                        <td>85</td>
+                      </tr>
+                      <tr>
+                        <td scope="row">A9-105</td>
+                        <td>A9745001</td>
+                        <td>MEDIA AND SOCIETY</td>
+                        <td>Required/General Education</td>
+                        <td>2</td>
+                        <td>96</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <div class=" bgpink text-danger p-3 mb-3 mt-3 text-center">
+                    Other tests with CEFR B2 level -> English Proficiency Requirement Fulfilled
+                  </div>
+                </div>
+                <div class="tab-pane fade" id="score3" role="tabpanel" aria-labelledby="score3-tab">
+                  <table class="table table-striped table-bordered table-hover mt-3">
+                    <thead>
+                      <tr>
+                        <th scope="col">Code-Serial Number</th>
+                        <th scope="col">Course System Number-Class Code</th>
+                        <th scope="col">Course Name</th>
+                        <th scope="col">Elective/Required</th>
+                        <th scope="col">Credits Elective</th>
+                        <th scope="col">Grades</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td scope="row">A6-6</td>
+                        <td>A621600</td>
+                        <td>THEORY OF COMPUTATION</td>
+                        <td>Elective</td>
+                        <td>0</td>
+                        <td>90</td>
+                      </tr>
+                      <tr>
+                        <td scope="row">A9-571</td>
+                        <td>A944100</td>
+                        <td>OPERATING SYSTEMS</td>
+                        <td>REQUIRED</td>
+                        <td>3</td>
+                        <td>85</td>
+                      </tr>
+                      <tr>
+                        <td scope="row">A9-105</td>
+                        <td>A9745001</td>
+                        <td>MEDIA AND SOCIETY</td>
+                        <td>Required/General Education</td>
+                        <td>2</td>
+                        <td>96</td>
+                      </tr>
+                      <tr>
+                        <td scope="row">A6-6</td>
+                        <td>A621600</td>
+                        <td>THEORY OF COMPUTATION</td>
+                        <td>Elective</td>
+                        <td>0</td>
+                        <td>90</td>
+                      </tr>
+                      <tr>
+                        <td scope="row">A9-571</td>
+                        <td>A944100</td>
+                        <td>OPERATING SYSTEMS</td>
+                        <td>REQUIRED</td>
+                        <td>3</td>
+                        <td>85</td>
+                      </tr>
+                      <tr>
+                        <td scope="row">A9-105</td>
+                        <td>A9745001</td>
+                        <td>MEDIA AND SOCIETY</td>
+                        <td>Required/General Education</td>
+                        <td>2</td>
+                        <td>96</td>
+                      </tr>
+                      <tr>
+                        <td scope="row">A6-6</td>
+                        <td>A621600</td>
+                        <td>THEORY OF COMPUTATION</td>
+                        <td>Elective</td>
+                        <td>0</td>
+                        <td>90</td>
+                      </tr>
+                      <tr>
+                        <td scope="row">A9-571</td>
+                        <td>A944100</td>
+                        <td>OPERATING SYSTEMS</td>
+                        <td>REQUIRED</td>
+                        <td>3</td>
+                        <td>85</td>
+                      </tr>
+                      <tr>
+                        <td scope="row">A9-105</td>
+                        <td>A9745001</td>
+                        <td>MEDIA AND SOCIETY</td>
+                        <td>Required/General Education</td>
+                        <td>2</td>
+                        <td>96</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+        </template>
+        <template v-else-if="page==4">
+          <div class="container-xxl p-3">
+            <table class="table table-striped table-bordered table-hover">
+              <thead>
+                <tr>
+                  <th scope="col">Academic Year</th>
+                  <th scope="col">Semester</th>
+                  <th scope="col">Course Name</th>
+                  <th scope="col">Grade</th>
+                  <th scope="col">Year</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>0109</td>
+                  <td>1</td>
+                  <td>PHYSICAL EDUCATION (1)</td>
+                  <td>82</td>
+                  <td>一上</td>
+                </tr>
+                <tr>
+                  <td>0109</td>
+                  <td>2</td>
+                  <td>TABLE TENNIS AND HEALTHY PHYSICAL FITNESS</td>
+                  <td>94</td>
+                  <td>一下</td>
+                </tr>
+                <tr>
+                  <td>0110</td>
+                  <td>2</td>
+                  <td>CHINESE MARTIAL ARTS(M,F)</td>
+                  <td>95</td>
+                  <td>二年級</td>
+                </tr>
+              </tbody>
+            </table>
+            <table class="table  table-bordered table-hover ">
+              <thead>
+                <tr>
+                  <th scope="col" class="text-danger">Course of Physical education for student from 99 Academic year :</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Freshman year,First semester:course name is Physical Education(1)</td>
+                </tr>
+                <tr>
+                  <td>Freshman year,Second semester:course name with Healthy Physical Fitness</td>
+                </tr>
+                <tr>
+                  <td>Sophomore:course name with specific sports,such as Badminton(M),Fitness Exercise(F),etc.</td>
+                </tr>
+                <tr>
+                  <td class="text-primary">Remark: For further information, please call office of Physical Education,ext:50405.</td>
+                </tr>
+
+              </tbody>
+            </table>
+          </div>
+        </template>
+        <template v-else>
+          <div>page not found</div>
+        </template>
+
+    </div>
+    </template>
+
+  </div>
+  </div>
+
+
+  <!-- Bootstrap core JS cdn 5.1.3 -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+    crossorigin="anonymous"></script>
+  <!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/3.2.37/vue.global.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.27.2/axios.min.js'></script> -->
+  <script src='/static/js/vue.js'></script>
+  <script src='/static/js/axios.js'></script>
+  <script>
+    let app = Vue.createApp({
+      data() {
+        return {
+          postresult: null,
+          getresult: null,
+          page: 0,
+          language: 1,
+          initmessage: "init waiting"
+        }
+      },
+      methods: {
+        changepage(val) {
+          this.page = val;
+        },
+        changelanguage(val) {
+          this.language = val;
+        },
+        axiosget(val) {
+          axios
+            // .get(`/test/get?yorn=${val}`)
+            .get("https://api.coindesk.com/v1/bpi/currentprice.json")
+            .then((response) => {
+              console.log("response data:", response.data);
+              // if (response.data.status == "success")
+              //     this.getresult = "get success";
+              // else
+              //     this.getresult = "get fail";
+              this.USD = response.data["bpi"]["USD"]["rate"];
+              this.GBP = response.data["bpi"]["GBP"]["rate"];
+              this.EUR = response.data["bpi"]["EUR"]["rate"];
+            })
+            .catch((error) => {
+              alert(error);
+            })
+            .finally(() => {
+              console.log("finally");
+            });
+        },
+        axiospost(val) {
+          axios
+            .post('/test/post', {
+              yorn: val
+            })
+            .then((response) => {
+              console.log("response data:", response.data);
+              if (response.data.status == "success")
+                this.postresult = "post success";
+              else
+                this.postresult = "post fail";
+            })
+            .catch((error) => {
+              alert(error);
+            })
+            .finally(() => {
+              console.log("finally");
+            });
+        },
+        axiosinit() {
+          axios
+            .get('/test/init')
+            .then((response) => {
+              console.log("response data:", response.data);
+              if (response.data.status == "success")
+                this.initmessage = response.data.data;
+              else
+                this.initmessage = "init fail";
+            })
+            .catch((error) => {
+              alert(error);
+            })
+            .finally(() => {
+              console.log("finally");
+            });
+        },
+      },
+      created() {
+        this.axiosinit();
+      },
+    }).mount('#app');
+  </script>
+
+</body>
+
+</html>
